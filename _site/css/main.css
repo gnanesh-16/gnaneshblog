@@ -172,6 +172,14 @@ a:visited {
     top: 3px;
 }
 
+.linkedin svg {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: 3px;
+}
+
 
 /* Page Content styles */
 /* ----------------------------------------------------------*/

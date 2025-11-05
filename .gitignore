@@ -1,4 +1,8 @@
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
+
 vendor
+
+# Build script
+run-fresh.bat
