@@ -4,7 +4,7 @@ title:  "New Rules"
 date:   2025-12-05 14:40:00 +0530
 categories: blog
 permalink: /:categories/:year/:month/:day/:title.html
-description: habuduhfuhuo
+description: "Understanding Jekyll's file naming conventions and how to structure blog posts with proper front matter and markdown formatting."
 ---
 
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.

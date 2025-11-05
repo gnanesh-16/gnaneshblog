@@ -8,7 +8,9 @@ layout: default
     <li>
       <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
       <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-      <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 50 }}</p>
+      {% if post.description %}
+      <p class="post-excerpt">{{ post.description }}</p>
+      {% endif %}
     </li>
     {% endfor %}
   </ul>
