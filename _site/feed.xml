@@ -1,19 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/gnaneshblog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gnaneshblog/" rel="alternate" type="text/html" /><updated>2025-11-05T21:57:01+05:30</updated><id>http://localhost:4000/gnaneshblog/feed.xml</id><title type="html">Gnanesh Balusa</title><subtitle>Software Developer sharing insights on technology, programming, and my journey in software development.</subtitle><entry><title type="html">JSONC: The Little Format That Could (Maybe?)</title><link href="http://localhost:4000/gnaneshblog/web-development/2025/11/05/JSONC-The-Little-Format-That-Could-(Maybe).html" rel="alternate" type="text/html" title="JSONC: The Little Format That Could (Maybe?)" /><published>2025-11-05T21:45:00+05:30</published><updated>2025-11-05T21:45:00+05:30</updated><id>http://localhost:4000/gnaneshblog/web-development/2025/11/05/JSONC-The%20Little%20Format%20That%20Could%20(Maybe)</id><content type="html" xml:base="http://localhost:4000/gnaneshblog/web-development/2025/11/05/JSONC-The-Little-Format-That-Could-(Maybe).html"><![CDATA[<p>That’s exactly the problem JSONC was born to solve.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/gnaneshblog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gnaneshblog/" rel="alternate" type="text/html" /><updated>2025-11-05T22:07:03+05:30</updated><id>http://localhost:4000/gnaneshblog/feed.xml</id><title type="html">Gnanesh Balusa</title><subtitle>Software Developer sharing insights on technology, programming, and my journey in software development.</subtitle><entry><title type="html">JSONC: The Little Format That Could (Maybe?)</title><link href="http://localhost:4000/gnaneshblog/web-development/2025/11/05/JSONC-The-Little-Format-That-Could-(Maybe).html" rel="alternate" type="text/html" title="JSONC: The Little Format That Could (Maybe?)" /><published>2025-11-05T21:45:00+05:30</published><updated>2025-11-05T21:45:00+05:30</updated><id>http://localhost:4000/gnaneshblog/web-development/2025/11/05/JSONC-The%20Little%20Format%20That%20Could%20(Maybe)</id><content type="html" xml:base="http://localhost:4000/gnaneshblog/web-development/2025/11/05/JSONC-The-Little-Format-That-Could-(Maybe).html"><![CDATA[<p>That’s exactly the problem JSONC was born to solve.</p>
 
-<p>JSON has become the go-to format for everything from API responses to game save files to configuration. It’s everywhere. But a lot of developers feel like it’s missing some pretty basic features. JSONC is one of several attempts to fix that.</p>
+<p>JSON has become the go-to format for everything from <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON" target="_blank">API responses</a> to game save files to configuration. It’s everywhere. But a lot of developers feel like it’s missing some pretty basic features. JSONC is one of several attempts to fix that.</p>
+<h2 id="what-even-is-jsonc">What Even Is JSONC?</h2>
 
-<p>What Even Is JSONC?
-Let’s start with the basics. JSON (JavaScript Object Notation) is a human-readable text format for storing structured data. It uses name-value pairs, arrays, and scalar values. The syntax comes from JavaScript, but these days pretty much every programming language can work with it. That’s the whole point. It’s supposed to be universal.</p>
-
-<p>But here’s where things get annoying. JSON has some rules that feel… unnecessarily strict:</p>
-
-<p>No comments. You can’t use // or /* */ to explain anything.</p>
-
-<p>No trailing commas. That comma after the last item in a list? That’ll break your entire file.</p>
-
-<p>Keys must be double-quoted. Always. No exceptions.</p>
-
-<p>Multiline strings don’t work. If you want text that wraps across lines, you’re out of luck.</p>
+<p>Let’s start with the basics. <a href="https://www.json.org/" target="_blank">JSON (JavaScript Object Notation)</a> is a human-readable text format for storing structured data. It uses name-value pairs, arrays, and scalar values. The syntax comes from JavaScript, but these days pretty much every programming language can work with it. That’s the whole point. It’s supposed to be universal.But here’s where things get annoying. JSON has some rules that feel… unnecessarily strict: No comments (you can’t use <code class="language-plaintext highlighter-rouge">//</code> or <code class="language-plaintext highlighter-rouge">/* */</code> to explain anything), no trailing commas (that comma after the last item in a list will break your entire file), keys must be double-quoted always with no exceptions, and multiline strings don’t work (if you want text that wraps across lines, you’re out of luck).</p>
 
 <p>So if you write something like this:</p>
 
@@ -39,8 +29,9 @@ of reading"</span><span class="p">,</span><span class="w">
 
 <p>Not terrible, but definitely less readable. And good luck remembering what that tab-width setting was for six months from now.</p>
 
-<p>Enter JSONC
-JSONC stands for “JSON with Comments.” And yeah, that’s pretty much what it does. It takes regular JSON and adds support for comments. That’s the main thing.</p>
+<h2 id="enter-jsonc">Enter JSONC</h2>
+
+<p>JSONC stands for “JSON with Comments.” And yeah, that’s pretty much what it does. It takes regular JSON and adds support for comments. That’s the main thing.</p>
 
 <p>Here’s what you can do with JSONC:</p>
 
@@ -56,120 +47,78 @@ JSONC stands for “JSON with Comments.” And yeah, that’s pretty much what i
 </span><span class="nl">"tab-width"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p>JSONC supports two types of comments:</p>
+<p>JSONC supports two types of comments: inline comments with <code class="language-plaintext highlighter-rouge">//</code> that run until the end of the line, and block comments with <code class="language-plaintext highlighter-rouge">/* */</code> that can span multiple lines. What it doesn’t support is the <code class="language-plaintext highlighter-rouge">#</code> style comments you’d use in bash scripts. Those won’t work here.</p>
 
-<p>Inline comments with // that run until the end of the line</p>
+<h2 id="but-wait-there-are-alternatives">But Wait, There Are Alternatives</h2>
+<p>Before you get too excited about JSONC, you should know there are other options out there trying to improve JSON.</p>
 
-<p>Block comments with /* */ that can span multiple lines</p>
+<h3 id="yaml">YAML</h3>
 
-<p>What it doesn’t support is the # style comments you’d use in bash scripts. Those won’t work here.</p>
+<p><a href="https://yaml.org/" target="_blank">YAML</a> is probably the most popular alternative. It makes significant changes to JSON’s syntax. Instead of curly braces, it uses indentation. It has custom data types and handles multiline strings naturally. You’ll see YAML used in <a href="https://docs.docker.com/compose/" target="_blank">Docker Compose</a>, <a href="https://docs.github.com/en/actions" target="_blank">GitHub Actions</a> workflows, and Ruby on Rails. YAML is powerful, but it’s also a bigger departure from JSON. Sometimes that’s exactly what you need. Other times, it’s overkill.</p>
 
-<p>But Wait, There Are Alternatives
-Before you get too excited about JSONC, you should know there are other options out there trying to improve JSON.</p>
+<h3 id="json5">JSON5</h3>
 
-<p>YAML
-YAML is probably the most popular alternative. It makes significant changes to JSON’s syntax. Instead of curly braces, it uses indentation. It has custom data types and handles multiline strings naturally. You’ll see YAML used in Docker Compose, GitHub Actions workflows, and Ruby on Rails.</p>
+<p><a href="https://json5.org/" target="_blank">JSON5</a> aims to be valid JavaScript while fixing pretty much everything people complain about in JSON. It allows trailing commas, unquoted keys, multiline strings, and comments. It’s used in Chromium, Next.js, and macOS programming. JSON5 is more ambitious than JSONC. It tries to fix everything. JSONC, on the other hand, stays focused on one thing: comments.</p>
 
-<p>YAML is powerful, but it’s also a bigger departure from JSON. Sometimes that’s exactly what you need. Other times, it’s overkill.</p>
+<h2 id="why-comments-actually-matter-a-lot">Why Comments Actually Matter (A Lot)</h2>
+<p>Okay, so comments might not sound revolutionary. But think about it. When was the last time you opened a config file and immediately understood every setting? Here’s where comments really shine:</p>
 
-<p>JSON5
-JSON5 aims to be valid JavaScript while fixing pretty much everything people complain about in JSON. It allows trailing commas, unquoted keys, multiline strings, and comments. It’s used in Chromium, Next.js, and macOS programming.</p>
+<h3 id="configuration-files">Configuration Files</h3>
 
-<p>JSON5 is more ambitious than JSONC. It tries to fix everything. JSONC, on the other hand, stays focused on one thing: comments.</p>
+<p>This is the big one. Config files benefit massively from comments. You can add examples right in the file, explain why you chose certain settings, document what each option does, and leave notes for your future self (or your teammates). Instead of maintaining a separate README that people might not find, the documentation lives right there in the config file itself.</p>
 
-<p>Why Comments Actually Matter (A Lot)
-Okay, so comments might not sound revolutionary. But think about it. When was the last time you opened a config file and immediately understood every setting?</p>
+<h3 id="data-annotation">Data Annotation</h3>
 
-<p>Here’s where comments really shine:</p>
+<p>When you’re storing data that different parts of your code interact with, comments let you explain what that data represents and how it all connects. It’s like leaving breadcrumbs for anyone who comes after you.</p>
 
-<p>Configuration Files
-This is the big one. Config files benefit massively from comments. You can:</p>
+<h3 id="temporary-debugging">Temporary Debugging</h3>
 
-<p>Add examples right in the file</p>
+<p>You can comment out sections of a file for testing, though honestly this is less common with data files. It can get confusing fast if you’re passing data between systems.</p>
 
-<p>Explain why you chose certain settings</p>
+<h2 id="the-other-side-of-the-argument">The Other Side of the Argument</h2>
+<p>Now, Douglas Crockford—the guy who originally created JSON—has opinions about comments. He deliberately removed them from JSON. Here’s what he said: “I removed comments from JSON because I saw people were using them to hold parsing directives, a practice which would have destroyed interoperability.” Fair point. Comments can be misused. If people start stuffing parsing instructions into comments, it breaks the whole idea of JSON being a neutral data format. So there’s a legitimate argument for leaving them out. But for config files that aren’t being passed between systems? Comments are incredibly useful.</p>
 
-<p>Document what each option does</p>
+<h2 id="the-downsides-because-nothings-perfect">The Downsides (Because Nothing’s Perfect)</h2>
 
-<p>Leave notes for your future self (or your teammates)</p>
+<p>JSONC sounds pretty good so far, right? But it’s not without problems.</p>
 
-<p>Instead of maintaining a separate README that people might not find, the documentation lives right there in the config file itself.</p>
+<h3 id="its-not-that-popular">It’s Not That Popular</h3>
 
-<p>Data Annotation
-When you’re storing data that different parts of your code interact with, comments let you explain what that data represents and how it all connects. It’s like leaving breadcrumbs for anyone who comes after you.</p>
+<p>This is the biggest issue. Most tools expect plain JSON, and they’ll fail if you feed them a JSONC file. JSONC is technically a superset of JSON (so all valid JSON is also valid JSONC), but it doesn’t work the other way around. If your tooling doesn’t support JSONC, you’re stuck. And most tooling doesn’t.</p>
 
-<p>Temporary Debugging
-You can comment out sections of a file for testing, though honestly this is less common with data files. It can get confusing fast if you’re passing data between systems.</p>
+<h3 id="it-doesnt-fix-other-annoyances">It Doesn’t Fix Other Annoyances</h3>
 
-<p>The Other Side of the Argument
-Now, Douglas Crockford—the guy who originally created JSON—has opinions about comments. He deliberately removed them from JSON. Here’s what he said:</p>
+<p>JSONC only adds comments. It doesn’t fix trailing commas. It doesn’t allow unquoted keys. If we’re going to create a new format anyway, why not fix everything? Trailing commas make code easier to maintain. You can add or remove items without worrying about comma placement. Git diffs look cleaner. But JSONC doesn’t support them.</p>
 
-<p>“I removed comments from JSON because I saw people were using them to hold parsing directives, a practice which would have destroyed interoperability.”</p>
-
-<p>Fair point. Comments can be misused. If people start stuffing parsing instructions into comments, it breaks the whole idea of JSON being a neutral data format. So there’s a legitimate argument for leaving them out.</p>
-
-<p>But for config files that aren’t being passed between systems? Comments are incredibly useful.</p>
-
-<p>The Downsides (Because Nothing’s Perfect)
-JSONC sounds pretty good so far, right? But it’s not without problems.</p>
-
-<p>It’s Not That Popular
-This is the biggest issue. Most tools expect plain JSON, and they’ll fail if you feed them a JSONC file. JSONC is technically a superset of JSON (so all valid JSON is also valid JSONC), but it doesn’t work the other way around.</p>
-
-<p>If your tooling doesn’t support JSONC, you’re stuck. And most tooling doesn’t.</p>
-
-<p>It Doesn’t Fix Other Annoyances
-JSONC only adds comments. It doesn’t fix trailing commas. It doesn’t allow unquoted keys. If we’re going to create a new format anyway, why not fix everything?</p>
-
-<p>Trailing commas make code easier to maintain. You can add or remove items without worrying about comma placement. Git diffs look cleaner. But JSONC doesn’t support them.</p>
-
-<p>Converting JSONC to JSON Is Awkward
-There’s a tool called JSMin (by Douglas Crockford) that can strip comments from JSONC and convert it to plain JSON. But it’s not as simple as you’d think.</p>
-
-<p>Because JSONC uses // and /* */ for comments (the same syntax as code), a converter needs to be a full JSON parser. It has to understand context to avoid accidentally removing something important.</p>
-
-<p>If JSONC had chosen a simpler comment syntax—like # in the first column—conversion would be trivial. You could do it with a single line of bash:</p>
+<h3 id="converting-jsonc-to-json-is-awkward">Converting JSONC to JSON Is Awkward</h3>
+<p>There’s a tool called <a href="https://www.crockford.com/jsmin.html" target="_blank">JSMin</a> (by Douglas Crockford) that can strip comments from JSONC and convert it to plain JSON. But it’s not as simple as you’d think. Because JSONC uses <code class="language-plaintext highlighter-rouge">//</code> and <code class="language-plaintext highlighter-rouge">/* */</code> for comments (the same syntax as code), a converter needs to be a full JSON parser. It has to understand context to avoid accidentally removing something important. If JSONC had chosen a simpler comment syntax—like <code class="language-plaintext highlighter-rouge">#</code> in the first column—conversion would be trivial. You could do it with a single line of bash:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">&lt;input.jsonc <span class="nb">grep</span> <span class="nt">-v</span> <span class="s1">'^#'</span> <span class="o">&gt;</span>output.json</code></pre></figure>
 
 <p>But with the current syntax, you need specialized tools.</p>
 
-<p>How to Actually Use JSONC Today
-So where will you encounter JSONC in the wild? Usually in configuration files.</p>
+<h2 id="how-to-actually-use-jsonc-today">How to Actually Use JSONC Today</h2>
 
-<p>The fastfetch program, for example, uses JSONC for its config. You can annotate your settings with notes, explanations, whatever you need.</p>
+<p>So where will you encounter JSONC in the wild? Usually in configuration files. The <a href="https://github.com/fastfetch-cli/fastfetch" target="_blank">fastfetch</a> program, for example, uses JSONC for its config. You can annotate your settings with notes, explanations, whatever you need.</p>
 
 <p>If you’re building something that needs to support JSONC, you’ve got two main approaches:</p>
 
-<p>Option 1: Convert It
-Use a tool like JSMin to strip comments and convert JSONC to plain JSON. Then handle it like you would any other JSON file.</p>
+<h3 id="option-1-convert-it">Option 1: Convert It</h3>
 
-<p>This works, but it adds an extra step to your workflow.</p>
+<p>Use a tool like JSMin to strip comments and convert JSONC to plain JSON. Then handle it like you would any other JSON file. This works, but it adds an extra step to your workflow.</p>
 
-<p>Option 2: Use a Library
-Grab a library that natively supports JSONC:</p>
+<h3 id="option-2-use-a-library">Option 2: Use a Library</h3>
 
-<p>For C: Check out yyjson. It handles JSONC comments plus trailing commas and other nice features.</p>
+<p>Grab a library that natively supports JSONC. For C, check out <a href="https://github.com/ibireme/yyjson" target="_blank">yyjson</a> which handles JSONC comments plus trailing commas and other nice features. For JavaScript, Microsoft’s <a href="https://github.com/microsoft/node-jsonc-parser" target="_blank">node-jsonc-parser</a> does the job and also supports trailing commas. Pick whichever fits better into your stack.</p>
 
-<p>For JavaScript: Microsoft’s node-jsonc-parser does the job. It also supports trailing commas.</p>
+<h2 id="so-should-you-use-jsonc">So Should You Use JSONC?</h2>
+<p>Here’s the truth: JSONC solves a specific problem really well. If you’re working with config files and wish you could add documentation inline, JSONC is perfect for that. But it’s not a universal JSON replacement. It doesn’t fix all of JSON’s quirks. And most importantly, it’s not widely supported. You’ll need to handle conversion or use specialized libraries if you want to integrate with standard JSON tooling.</p>
 
-<p>Pick whichever fits better into your stack.</p>
+<p>If you’re building something new and you control the entire stack, JSONC is worth considering. For config files especially, the ability to add comments is legitimately valuable. But if you’re working in an ecosystem that expects standard JSON? Stick with JSON. It’s been working great for years, and there’s no shame in that.</p>
 
-<p>So Should You Use JSONC?
-Here’s the truth: JSONC solves a specific problem really well. If you’re working with config files and wish you could add documentation inline, JSONC is perfect for that.</p>
+<h2 id="the-big-takeaway">The Big Takeaway</h2>
 
-<p>But it’s not a universal JSON replacement. It doesn’t fix all of JSON’s quirks. And most importantly, it’s not widely supported. You’ll need to handle conversion or use specialized libraries if you want to integrate with standard JSON tooling.</p>
-
-<p>If you’re building something new and you control the entire stack, JSONC is worth considering. For config files especially, the ability to add comments is legitimately valuable.</p>
-
-<p>But if you’re working in an ecosystem that expects standard JSON? Stick with JSON. It’s been working great for years, and there’s no shame in that.</p>
-
-<p>The Big Takeaway
-JSONC isn’t trying to replace JSON for everything. It’s trying to make config files and annotated data more maintainable. For that specific use case, it succeeds.</p>
-
-<p>Would it be better if it also fixed trailing commas and unquoted keys? Probably. Would it be better if conversion to JSON was simpler? Definitely.</p>
-
-<p>But for what it is—JSON with comments—it does the job. And sometimes, that’s exactly what you need.</p>
+<p>JSONC isn’t trying to replace JSON for everything. It’s trying to make config files and annotated data more maintainable. For that specific use case, it succeeds. Would it be better if it also fixed trailing commas and unquoted keys? Probably. Would it be better if conversion to JSON was simpler? Definitely. But for what it is—JSON with comments—it does the job. And sometimes, that’s exactly what you need.</p>
 
 <p>For more insights on web development, programming, and tech, check out Gnanesh Balusa’s blog.</p>
 
