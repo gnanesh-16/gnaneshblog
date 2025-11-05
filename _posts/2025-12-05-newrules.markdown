@@ -4,20 +4,29 @@ title:  "New Rules"
 date:   2025-12-05 14:40:00 +0530
 categories: blog
 permalink: /:categories/:year/:month/:day/:title.html
+description: habuduhfuhuo
 ---
 
-This is a new post about rules and guidelines.
+You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-## Introduction
+Jekyll requires blog post files to be named according to the following format:
 
-Here's where you can start writing your content about new rules.
+`YEAR-MONTH-DAY-title.MARKUP`
 
-You can use **markdown** formatting to make your content more readable.
+Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
 
-## Key Points
+Jekyll also offers powerful support for code snippets:
 
-1. First rule
-2. Second rule
-3. Third rule
+{% highlight ruby %}
+def print_hi(name)
+  puts "Hi, #{name}"
+end
+print_hi('Tom')
+#=> prints 'Hi, Tom' to STDOUT.
+{% endhighlight %}
 
-Feel free to add more content here!
+Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+
+[jekyll-docs]: https://jekyllrb.com/docs/home
+[jekyll-gh]:   https://github.com/jekyll/jekyll
+[jekyll-talk]: https://talk.jekyllrb.com/
