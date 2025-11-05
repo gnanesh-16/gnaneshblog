@@ -1,5 +1,8 @@
 ---
-
+layout: post
+title: "New Rules"
+date: 2025-12-05 14:40:00 +0530
+categories: blog
 ---
 
 Content  
