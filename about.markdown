@@ -2,17 +2,11 @@
 layout: page
 title: About
 permalink: /about/
+includelink: true
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Welcome to my personal blog! I'm Gnanesh Balusa, a software developer passionate about technology and programming.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+Here I share my insights, experiences, and learnings in the world of software development. You'll find posts about various programming languages, frameworks, and technologies that I work with.
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
+Feel free to connect with me on [GitHub](https://github.com/gnanesh-16) or [LinkedIn](https://linkedin.com/in/gnaneshbalusa).
