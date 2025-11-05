@@ -1,8 +1,23 @@
 ---
 layout: post
-title: "New Rules"
-date: 2025-12-05 14:40:00 +0530
+title:  "New Rules"
+date:   2025-12-05 14:40:00 +0530
 categories: blog
+permalink: /:categories/:year/:month/:day/:title.html
 ---
 
-Content  
+This is a new post about rules and guidelines.
+
+## Introduction
+
+Here's where you can start writing your content about new rules.
+
+You can use **markdown** formatting to make your content more readable.
+
+## Key Points
+
+1. First rule
+2. Second rule
+3. Third rule
+
+Feel free to add more content here!

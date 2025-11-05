@@ -33,6 +33,12 @@ github_username: gnanesh-16
 theme: minima
 plugins:
   - jekyll-feed
+
+# Post settings
+permalink: /:categories/:year/:month/:day/:title.html
+future: true
+
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
