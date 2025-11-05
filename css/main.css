@@ -247,10 +247,19 @@ a:visited {
 
 .post-content {
     margin: 0 0 30px;
+    color: #222;
+    font-size: 15px;
+    line-height: 1.7;
 }
 
 .post-content>* {
     margin: 20px 0;
+}
+
+.post-content p {
+    margin: 20px 0;
+    line-height: 1.7;
+    font-size: 15px;
 }
 
 
