@@ -18,18 +18,42 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: "Gnanesh Balusa"
+title: "Gnanesh Balusa blog"
 description: >- # this means to ignore newlines until "baseurl:"
   Software Developer sharing insights on technology, programming, and my journey in software development.
 baseurl: "/gnaneshblog" # the subpath of your site, e.g. /blog
-url: "http://gnaneshbalusa.me" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://gnaneshbalusa.me" # the base hostname & protocol for your site
+enforce_ssl: true
 linkedin_username: gnaneshbalusa
 github_username: gnanesh-16
+
+# Author information for SEO (email intentionally omitted)
+author:
+  name: Gnanesh Balusa
+  twitter: gnaneshbalusa
+  linkedin: gnaneshbalusa
+  github: gnanesh-16
+
+# SEO Settings
+lang: en_US
+timezone: Asia/Kolkata
+
+# Social media and SEO
+social:
+  name: Gnanesh Balusa
+  links:
+    - https://www.linkedin.com/in/gnaneshbalusa
+    - https://github.com/gnanesh-16
+
+# Default image used for social previews (Open Graph)
+image: "/assets/og-image.svg"
 
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
 
 # Post settings
 permalink: /:categories/:year/:month/:day/:title.html
