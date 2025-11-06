@@ -4,7 +4,12 @@
 
         <div class="footer-col-1 column">
             <ul>
-                <li>{{ site.title }}</li>
+                <li>
+                    {{ site.title }}
+                    <button class="dark-mode-button" id="darkModeToggle" title="Toggle dark mode">
+                        <span class="button-icon">🌙</span>
+                    </button>
+                </li>
             </ul>
         </div>
 
@@ -55,3 +60,31 @@
     </div>
 
 </footer>
+
+<script>
+    // Dark mode toggle with persistence across all pages
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const buttonIcon = darkModeToggle.querySelector('.button-icon');
+    const body = document.body;
+
+    // Check for saved dark mode preference on page load
+    const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+
+    if (savedDarkMode) {
+        body.classList.add('dark-mode');
+        buttonIcon.textContent = '☀️';
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        const isDarkMode = !body.classList.contains('dark-mode');
+
+        // Toggle dark mode immediately
+        body.classList.toggle('dark-mode');
+
+        // Save preference to localStorage
+        localStorage.setItem('darkMode', isDarkMode);
+
+        // Update button icon
+        buttonIcon.textContent = isDarkMode ? '☀️' : '🌙';
+    });
+</script>
