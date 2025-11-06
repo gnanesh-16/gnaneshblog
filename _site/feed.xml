@@ -1,4 +1,144 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/gnaneshblog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gnaneshblog/" rel="alternate" type="text/html" /><updated>2025-11-05T22:31:34+05:30</updated><id>http://localhost:4000/gnaneshblog/feed.xml</id><title type="html">Gnanesh Balusa</title><subtitle>Software Developer sharing insights on technology, programming, and my journey in software development.</subtitle><entry><title type="html">JSONC: The Little Format That Could (Maybe?)</title><link href="http://localhost:4000/gnaneshblog/web-development/2025/11/05/JSONC-The-Little-Format-That-Could-(Maybe).html" rel="alternate" type="text/html" title="JSONC: The Little Format That Could (Maybe?)" /><published>2025-11-05T21:45:00+05:30</published><updated>2025-11-05T21:45:00+05:30</updated><id>http://localhost:4000/gnaneshblog/web-development/2025/11/05/JSONC-The%20Little%20Format%20That%20Could%20(Maybe)</id><content type="html" xml:base="http://localhost:4000/gnaneshblog/web-development/2025/11/05/JSONC-The-Little-Format-That-Could-(Maybe).html"><![CDATA[<p>That’s exactly the problem JSONC was born to solve.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_US"><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/gnaneshblog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gnaneshblog/" rel="alternate" type="text/html" hreflang="en_US" /><updated>2025-11-06T21:08:06+05:30</updated><id>http://localhost:4000/gnaneshblog/feed.xml</id><title type="html">Gnanesh Balusa blog</title><subtitle>Software Developer sharing insights on technology, programming, and my journey in software development.</subtitle><author><name>Gnanesh Balusa</name></author><entry><title type="html">The Quantization Question That Breaks GenAI Engineers in Amazon Interviews</title><link href="http://localhost:4000/gnaneshblog/genai-engineering/2025/11/06/The-Quantization-Question-That-Breaks-GenAI-Engineers-in-Amazon-Interviews.html" rel="alternate" type="text/html" title="The Quantization Question That Breaks GenAI Engineers in Amazon Interviews" /><published>2025-11-06T20:30:00+05:30</published><updated>2025-11-06T20:30:00+05:30</updated><id>http://localhost:4000/gnaneshblog/genai-engineering/2025/11/06/The%20Quantization%20Question%20That%20Breaks%20GenAI%20Engineers%20in%20Amazon%20Interviews</id><content type="html" xml:base="http://localhost:4000/gnaneshblog/genai-engineering/2025/11/06/The-Quantization-Question-That-Breaks-GenAI-Engineers-in-Amazon-Interviews.html"><![CDATA[<p>You’re sitting across from an interviewer at Amazon. The room’s quiet except for the keyboard clicks. Then they drop it:</p>
+
+<p>“We’re building a recommendation engine using a 70B parameter LLM on AWS. Should we use 4-bit or 8-bit quantization? Justify your choice. Also, which EC2 instance types would you recommend?”</p>
+
+<p>Your heart skips. You know what quantization is, right? Reduce the model size. Cool. But that answer? That’s a junior developer answer. And you just watched half the room bomb this exact question.</p>
+
+<p>Here’s the thing most candidates fumble because they only know the surface-level definition. “Quantization reduces model size.” That’s like saying a car is something with wheels. Technically true, but useless.</p>
+
+<p>The engineers who get the offer? They understand that quantization is about tradeoffs. Deep ones. The kind that determine whether your model runs efficiently on AWS SageMaker or ends up costing the company thousands in wasted compute every month.</p>
+
+<h2 id="the-five-things-you-need-to-know-cold">The Five Things You Need to Know Cold</h2>
+
+<h3 id="1-the-precision-performance-tradeoff-the-fundamental-difference">1. The Precision-Performance Tradeoff: The Fundamental Difference</h3>
+
+<p>This is where most people get it wrong. They think smaller always means better. Nope.</p>
+
+<p><strong>8-bit (INT8)</strong> maintains near-identical accuracy. We’re talking performance degradation under 1% on most tasks. It uses linear quantization, which means the conversion is straightforward:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Q = round(scale × W + zero_point)
+</code></pre></div></div>
+
+<p>That linearity matters. It’s predictable. If you’re running recommendation systems or search ranking at Amazon scale, that 1% degradation is almost invisible to users.</p>
+
+<p><strong>4-bit (INT4/NF4)</strong> trades accuracy for efficiency. You’re looking at 2-5% performance degradation depending on the architecture. It uses non-linear quantization specifically something called NormalFloat4 which tries hard to preserve the distribution of weights, but it’s fighting an uphill battle. Ever wonder why companies like Google with their LLaMA and Meta use 4-bit more often? They’ve got the infrastructure and validation pipelines to catch quality issues. You might not.</p>
+
+<p>Here’s the brutal truth that interviewers at Amazon want to hear: <strong>8-bit is production-safe. 4-bit requires extensive validation and monitoring in production.</strong></p>
+
+<p>For a recommendation engine? Getting recommendations wrong kills engagement. Kill engagement and revenue drops. That’s the conversation you need to have.</p>
+
+<h3 id="2-the-memory-footprint-where-90-of-engineers-go-wrong">2. The Memory Footprint: Where 90% of Engineers Go Wrong</h3>
+
+<p>Everyone thinks they understand this part. They don’t.</p>
+
+<p>Most people say “4-bit is 2x smaller than 8-bit.” Wrong move. Let me show you the actual numbers that matter for AWS deployment.</p>
+
+<p>Starting with <strong>FP32 (full precision)</strong>: a 70B model takes up 280GB. You’d need multiple <code class="language-plaintext highlighter-rouge">p4d.24xlarge</code> instances just for storage.</p>
+
+<p><strong>INT8</strong> gets you to 70GB. That’s 4x compression. Nice. You’re looking at a single <code class="language-plaintext highlighter-rouge">p3.8xlarge</code> or smaller <code class="language-plaintext highlighter-rouge">g4dn</code> instance family.</p>
+
+<p><strong>INT4</strong> gets you to 35GB. That’s 8x compression. Even nicer, right? Here’s where people get excited and make mistakes.</p>
+
+<p>But you’re not just storing the weights. You’ve still got overhead. Serious overhead. The KV cache (that’s the key-value pairs stored during inference), the activations as data flows through the model, attention buffers… that all adds up fast.</p>
+
+<p>Real-world 70B INT4 deployment on SageMaker? You’re looking at <strong>48-60GB minimum</strong>. Not 35GB. Not even close.</p>
+
+<p>So when your infrastructure team suggests a <code class="language-plaintext highlighter-rouge">g4dn.xlarge</code> with 24GB, you nod politely and then explain why INT4 on that hardware is going to bottleneck your inference. You’d be running single-batch inference at best. At Amazon scale with millions of users? That’s a non-starter.</p>
+
+<p>An <code class="language-plaintext highlighter-rouge">p3.8xlarge</code> with 32GB? A <code class="language-plaintext highlighter-rouge">p4d.24xlarge</code>? Those fit a 70B INT8 model comfortably with room to breathe for batches of 8-16 concurrent requests. That changes the economics of your entire SageMaker deployment and your cost per inference.</p>
+
+<h3 id="3-the-quantization-method-the-hidden-production-killer">3. The Quantization Method: The Hidden Production Killer</h3>
+
+<p>Here’s what separates junior engineers from senior ones. Junior devs pick a quantization method and hope it works. Senior engineers know the methods matter more than the bit depth.</p>
+
+<p><strong>Post-Training Quantization (PTQ)</strong> is fast. You’re talking hours, maybe a day. It works reliably for 8-bit. Companies like Google DeepMind often use PTQ for their initial experiments. For 4-bit? The quality bounces all over the place. Sometimes it’s fine. Sometimes it’s a disaster. And you won’t know which until you’re in production.</p>
+
+<p><strong>GPTQ and AWQ</strong> (these are advanced PTQ methods developed by researchers at UC Berkeley and MIT) are the industry standard for 4-bit LLMs. They use weight-only quantization combined with calibration. But here’s the catch you need a representative calibration dataset. Not just any data. Representative data that actually looks like what your model will see in production.</p>
+
+<p>At Amazon, if you’re building a recommendation engine, your calibration set needs to look like real user queries and product catalogs. Get this wrong and your model will fail spectacularly when it sees real data. Your recommendation engine starts suggesting random products, and suddenly you’ve got a business problem, not just a technical problem.</p>
+
+<p><strong>Quantization-Aware Training (QAT)</strong> is the gold standard. You’re training the model knowing it’ll be quantized, so the weights adapt during training. Companies like Microsoft with their Phi models use QAT extensively. But this costs compute. Days or weeks of GPU time. It’s expensive. It’s rarely done unless the stakes are genuinely high.</p>
+
+<p>For a recommendation system at Amazon scale? The stakes are high. But the question becomes: do you have the compute budget for QAT? If yes, do it. If no, stick with 8-bit and sleep better at night.</p>
+
+<h3 id="4-the-inference-speed-tradeoff-the-counterintuitive-reality">4. The Inference Speed Tradeoff: The Counterintuitive Reality</h3>
+
+<p>Everyone assumes 4-bit is faster because it’s smaller. Welcome to the world where intuition breaks.</p>
+
+<p><strong>8-bit has native GPU support.</strong> Your Tensor Cores (the specialized hardware on modern GPUs like those on AWS <code class="language-plaintext highlighter-rouge">p3</code> and <code class="language-plaintext highlighter-rouge">p4d</code> instances) can handle <code class="language-plaintext highlighter-rouge">INT8</code> operations natively. Matrix multiplication runs at maximum speed. You get 1.5-2x throughput compared to <code class="language-plaintext highlighter-rouge">FP16</code> (half precision). This is why NVIDIA pushed so hard on INT8 support in Ampere and Hopper architectures.</p>
+
+<p><strong>4-bit doesn’t have that native support</strong> on most hardware. The GPU has to dequantize the weights back to <code class="language-plaintext highlighter-rouge">FP16</code> before it can do the actual computation. That dequantization step costs time and bandwidth. You’re memory-bandwidth bound, not compute-bound. The counterintuitive reality? 4-bit often isn’t faster despite being smaller.</p>
+
+<p>In some cases, 4-bit is actually slower than 8-bit for inference because of all that dequantization overhead. This is why companies like Google Cloud and Azure often default to 8-bit for latency-critical workloads.</p>
+
+<p>That matters when you’re trying to serve recommendations in real-time. Every millisecond counts when you’ve got users waiting.</p>
+
+<h3 id="5-the-deployment-reality-the-costs-nobody-talks-about">5. The Deployment Reality: The Costs Nobody Talks About</h3>
+
+<p>This is where theory meets infrastructure, and where most candidates fall apart in interviews.</p>
+
+<p><strong>8-bit scenario:</strong> A <code class="language-plaintext highlighter-rouge">p3.8xlarge</code> on AWS fits a 70B model comfortably. You can run batch sizes of 8-16. Multiple requests can be served together. Your cost per inference goes down significantly. Your latency stays reasonable even under load. Monthly cost for on-demand: around $12,000. Predictable. Manageable.</p>
+
+<p><strong>4-bit scenario:</strong> A <code class="language-plaintext highlighter-rouge">g4dn.12xlarge</code> with 48GB can technically run a 70B model. The word “technically” does a lot of heavy lifting here. You’re looking at batch size 1-4 maximum. One or two requests at a time, essentially. Your throughput tanks. Your cost per inference skyrockets. You might save on compute hours, but you need way more instances to handle the same load. Monthly cost suddenly becomes $40,000+ because you’re running more instances at lower utilization.</p>
+
+<p>The math gets harsh fast. If you need to serve millions of recommendations per day (which Amazon definitely does), 4-bit on smaller EC2 instances isn’t happening. You’d need a farm of high-end instances anyway, and suddenly your “cost savings” from quantization disappear into AWS bills.</p>
+
+<p>This is exactly the kind of thinking that separates people who understand cloud economics from those who just understand machine learning.</p>
+
+<h2 id="so-when-do-you-actually-pick-each-one">So When Do You Actually Pick Each One?</h2>
+
+<p><strong>Go with 8-bit when:</strong></p>
+
+<ul>
+  <li>Latency is critical (recommendations, search ranking, real-time predictions)</li>
+  <li>You need batch inference with reasonable throughput</li>
+  <li>Your team doesn’t have extensive ML ops expertise for validation</li>
+  <li>You want predictable AWS costs</li>
+  <li>Production reliability matters more than squeezing every last bit of efficiency</li>
+</ul>
+
+<p><strong>Go with 4-bit when:</strong></p>
+
+<ul>
+  <li>Extreme memory constraints force your hand</li>
+  <li>Cost per inference is the only metric that matters</li>
+  <li>You can tolerate 2-5% quality degradation</li>
+  <li>You’re using GPTQ or AWQ with extensive calibration</li>
+  <li>Your team has time and resources to validate thoroughly in staging</li>
+  <li>You’re at a company like Google or Meta with massive ML infrastructure</li>
+</ul>
+
+<h2 id="the-answer-they-want-to-hear-at-amazon">The Answer They Want to Hear at Amazon</h2>
+
+<p>So you’re in that interview. What do you actually say?</p>
+
+<p>“For an Amazon recommendation engine, I’d go with 8-bit quantization. Here’s why:</p>
+
+<p>First, the accuracy hit. 8-bit gives us less than 1% degradation. In recommendations, that’s acceptable. We might lose one or two good suggestions per user session, which is barely noticeable. 4-bit’s 2-5% degradation means we might be recommending significantly less relevant products. That kills engagement and revenue.</p>
+
+<p>Second, the AWS hardware reality. A <code class="language-plaintext highlighter-rouge">p3.8xlarge</code> or <code class="language-plaintext highlighter-rouge">p4d.24xlarge</code> handles 70B INT8 comfortably with batch sizes of 8-16. That means we can serve multiple users’ requests concurrently. 4-bit on <code class="language-plaintext highlighter-rouge">g4dn</code> instances gives us batch size 1-4 max. We’d need to spin up way more instances to handle the same throughput, which actually costs more money, not less.</p>
+
+<p>Third, latency. 8-bit has native Tensor Core support on AWS P3 and P4D instances. 4-bit requires dequantization overhead. For something as time-sensitive as real-time recommendations where users are waiting for results, 8-bit is measurably faster. We’re talking 20-40ms latency difference, which matters at scale.</p>
+
+<p>Finally, operational simplicity. 8-bit is battle-tested across the industry. Most SageMaker examples use it. Most monitoring tools understand it. We can put this into production confidently next week. 4-bit would require us to build custom calibration pipelines, extensive validation in staging, and more sophisticated monitoring to catch accuracy degradation. That’s weeks of work.</p>
+
+<p>Now, if memory was genuinely the bottleneck and we had to use 4-bit say we only had access to <code class="language-plaintext highlighter-rouge">g4dn</code> instances we’d use GPTQ with our actual recommendation logs as calibration data, run A/B tests extensively before scaling, and probably invest in QAT down the line. But given we’ve got AWS infrastructure available? 8-bit is the right call.”</p>
+
+<p>That’s the answer that gets you to the next round.</p>
+
+<h2 id="the-real-takeaway">The Real Takeaway</h2>
+
+<p>Quantization isn’t just about model size. It’s about understanding the entire ecosystem your AWS hardware options, your latency requirements, your accuracy tolerance, and your cloud budget. Pick the wrong one and you’re either wasting money or losing money. Maybe both.</p>
+
+<p>The engineers who get hired at Amazon, Google, or Microsoft know that the technical choice isn’t separate from the business choice. They’re the same thing. They understand that a quantization decision is actually an infrastructure decision, which is actually a revenue decision. That’s what separates the people who design systems that actually work in production from those who just know the theory.</p>
+
+<p>And that’s the difference between getting an offer and getting a polite “we’ll be in touch.”</p>
+
+<hr />
+
+<p>For more insights on GenAI engineering, AWS deployment, interviews at tech companies, and what it actually takes to deploy LLMs at scale, check out Gnanesh Balusa’s blog.</p>
+
+<p>Published on November 6, 2025 at 8:30 PM IST <a href="/gnaneshblog/feed.xml" target="_blank">RSS feed</a>.</p>]]></content><author><name>Gnanesh Balusa</name></author><category term="genai-engineering" /><category term="quantization" /><category term="llm" /><category term="genai" /><category term="amazon" /><category term="interviews" /><category term="production-deployment" /><category term="deep-learning" /><category term="aws" /><category term="machine-learning" /><summary type="html"><![CDATA[Amazon asks you to deploy a 70B LLM for production systems. 4-bit or 8-bit quantization? Most GenAI engineers freeze. Here's what separates the candidates who actually know their stuff from those who bomb the interview.]]></summary></entry><entry><title type="html">JSONC: The Little Format That Could (Maybe?)</title><link href="http://localhost:4000/gnaneshblog/web-development/2025/11/05/JSONC-The-Little-Format-That-Could-(Maybe).html" rel="alternate" type="text/html" title="JSONC: The Little Format That Could (Maybe?)" /><published>2025-11-05T21:45:00+05:30</published><updated>2025-11-05T21:45:00+05:30</updated><id>http://localhost:4000/gnaneshblog/web-development/2025/11/05/JSONC-The%20Little%20Format%20That%20Could%20(Maybe)</id><content type="html" xml:base="http://localhost:4000/gnaneshblog/web-development/2025/11/05/JSONC-The-Little-Format-That-Could-(Maybe).html"><![CDATA[<p>That’s exactly the problem JSONC was born to solve.</p>
 
 <p>JSON has become the go-to format for everything from <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON" target="_blank">API responses</a> to game save files to configuration. It’s everywhere. But a lot of developers feel like it’s missing some pretty basic features. JSONC is one of several attempts to fix that.</p>
 <h2 id="what-even-is-jsonc">What Even Is JSONC?</h2>
