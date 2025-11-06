@@ -2,11 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://localhost:4000/gnaneshblog/</loc>
-    <lastmod>2025-11-06T21:08:06+05:30</lastmod>
+    <lastmod>2025-11-06T21:24:48+05:30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
+  
+  <url>
+    <loc>http://localhost:4000/gnaneshblog/ai/2025/11/06/Skip-ChatGPT-Forever-Run-Your-Own-AI-on-Any-Laptop-for-Free.html</loc>
+    <lastmod>2025-11-06T21:18:00+05:30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   
   <url>
     <loc>http://localhost:4000/gnaneshblog/genai-engineering/2025/11/06/The-Quantization-Question-That-Breaks-GenAI-Engineers-in-Amazon-Interviews.html</loc>
@@ -29,7 +36,7 @@
     
   <url>
     <loc>http://localhost:4000/gnaneshblog/about/</loc>
-    <lastmod>2025-11-06T21:08:06+05:30</lastmod>
+    <lastmod>2025-11-06T21:24:48+05:30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
