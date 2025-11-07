@@ -1,4 +1,4 @@
-# Gnanesh Balusa Blog
+# Gnanesh Balusa Blog 
 
 Welcome to the personal blog of **Gnanesh Balusa**, a passionate software developer sharing insights on technology, programming, web development, and software engineering.
 
