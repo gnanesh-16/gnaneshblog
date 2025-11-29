@@ -2,11 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://localhost:4000/gnaneshblog/</loc>
-    <lastmod>2025-11-06T21:48:06+05:30</lastmod>
+    <lastmod>2025-11-29T14:39:49+05:30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
+  
+  <url>
+    <loc>http://localhost:4000/gnaneshblog/ai-development/2025/11/29/MCP-The-Protocol-That-Finally-Connected-AI-to-the-Real-World.html</loc>
+    <lastmod>2025-11-29T14:07:00+05:30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   
   <url>
     <loc>http://localhost:4000/gnaneshblog/ai/2025/11/06/Skip-ChatGPT-Forever-Run-Your-Own-AI-on-Any-Laptop-for-Free.html</loc>
@@ -36,7 +43,7 @@
     
   <url>
     <loc>http://localhost:4000/gnaneshblog/about/</loc>
-    <lastmod>2025-11-06T21:48:06+05:30</lastmod>
+    <lastmod>2025-11-29T14:39:49+05:30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

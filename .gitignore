@@ -1,7 +1,8 @@
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
- 
+.github
+node_modules
 vendor
 
 # Build script

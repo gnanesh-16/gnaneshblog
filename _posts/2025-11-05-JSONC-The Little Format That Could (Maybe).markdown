@@ -92,7 +92,7 @@ When you're storing data that different parts of your code interact with, commen
 You can comment out sections of a file for testing, though honestly this is less common with data files. It can get confusing fast if you're passing data between systems.
 
 ## The Other Side of the Argument
-Now, Douglas Crockford—the guy who originally created JSON—has opinions about comments. He deliberately removed them from JSON. Here's what he said: "I removed comments from JSON because I saw people were using them to hold parsing directives, a practice which would have destroyed interoperability." Fair point. Comments can be misused. If people start stuffing parsing instructions into comments, it breaks the whole idea of JSON being a neutral data format. So there's a legitimate argument for leaving them out. But for config files that aren't being passed between systems? Comments are incredibly useful.
+Now, Douglas Crockford, the guy who originally created JSON, has opinions about comments. He deliberately removed them from JSON. Here's what he said: "I removed comments from JSON because I saw people were using them to hold parsing directives, a practice which would have destroyed interoperability." Fair point. Comments can be misused. If people start stuffing parsing instructions into comments, it breaks the whole idea of JSON being a neutral data format. So there's a legitimate argument for leaving them out. But for config files that aren't being passed between systems? Comments are incredibly useful.
 
 ## The Downsides (Because Nothing's Perfect)
 
@@ -107,7 +107,7 @@ This is the biggest issue. Most tools expect plain JSON, and they'll fail if you
 JSONC only adds comments. It doesn't fix trailing commas. It doesn't allow unquoted keys. If we're going to create a new format anyway, why not fix everything? Trailing commas make code easier to maintain. You can add or remove items without worrying about comma placement. Git diffs look cleaner. But JSONC doesn't support them.
 
 ### Converting JSONC to JSON Is Awkward
-There's a tool called [JSMin](https://www.crockford.com/jsmin.html){:target="_blank"} (by Douglas Crockford) that can strip comments from JSONC and convert it to plain JSON. But it's not as simple as you'd think. Because JSONC uses `//` and `/* */` for comments (the same syntax as code), a converter needs to be a full JSON parser. It has to understand context to avoid accidentally removing something important. If JSONC had chosen a simpler comment syntax—like `#` in the first column—conversion would be trivial. You could do it with a single line of bash:
+There's a tool called [JSMin](https://www.crockford.com/jsmin.html){:target="_blank"} (by Douglas Crockford) that can strip comments from JSONC and convert it to plain JSON. But it's not as simple as you'd think. Because JSONC uses `//` and `/* */` for comments (the same syntax as code), a converter needs to be a full JSON parser. It has to understand context to avoid accidentally removing something important. If JSONC had chosen a simpler comment syntax, like `#` in the first column, conversion would be trivial. You could do it with a single line of bash:
 
 {% highlight bash %}
 <input.jsonc grep -v '^#' >output.json
@@ -136,7 +136,7 @@ If you're building something new and you control the entire stack, JSONC is wort
 
 ## The Big Takeaway
 
-JSONC isn't trying to replace JSON for everything. It's trying to make config files and annotated data more maintainable. For that specific use case, it succeeds. Would it be better if it also fixed trailing commas and unquoted keys? Probably. Would it be better if conversion to JSON was simpler? Definitely. But for what it is—JSON with comments—it does the job. And sometimes, that's exactly what you need.
+JSONC isn't trying to replace JSON for everything. It's trying to make config files and annotated data more maintainable. For that specific use case, it succeeds. Would it be better if it also fixed trailing commas and unquoted keys? Probably. Would it be better if conversion to JSON was simpler? Definitely. But for what it is, JSON with comments, it does the job. And sometimes, that's exactly what you need.
 
 
 For more insights on web development, programming, and tech, check out Gnanesh Balusa's blog.
